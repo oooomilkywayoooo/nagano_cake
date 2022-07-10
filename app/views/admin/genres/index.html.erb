@@ -21,10 +21,9 @@
            <tr>
              <% @genres.each do |genre| %>
                <tr><td>
-                 <span class="mr-5 pr-4"><%= genre.name %></span>
-                 <div class="d-inline ml-5 pl-5"><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success px3" %></div>
+                 <span class=><%= genre.name %></span>
+                 <td><div class="text-right"><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success px3" %></div></td>
                </td></tr>
-
              <% end %>
            </tr>
          </tbody>
