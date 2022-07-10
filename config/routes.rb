@@ -9,5 +9,15 @@ Rails.application.routes.draw do
     passwords:     'customers/passwords',
     registrations: 'customers/registrations'
   }
+  get '/' => 'public/homes#top'
+  get '/about' => 'public/homes#about'
+
+  resources :items, only: [:index, :show]
+
+  namespace :admin do
+    resources :items, except: [:destroy]
+  end
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
