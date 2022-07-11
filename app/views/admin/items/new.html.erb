@@ -1,1 +1,11 @@
-Admin#new
+<div class="container mx-auto">
+   <p class="mt-5" style="width: 200px;">
+     <h4><strong class="bg-light px-3">商品新規登録</strong></h4>
+   </p>
+   <div class="row mx-auto" style="width: 600px;">
+     <%= form_with model: @item, local: true do |f| %>
+     <strong>商品画像</strong>
+     <label class="px-5 mt-5"><%= f.attachment_field :thumbnail %></label>
+     <% end %>
+   </div>
+</div>

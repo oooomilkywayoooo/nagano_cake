@@ -2,7 +2,7 @@
    <p class="mt-5" style="width: 200px;">
      <h4><strong class="bg-light px-3">ジャンル一覧・追加</strong></h4>
    </p>
-   <div class="row" style="width: 600px;">
+   
       <%= form_with model: @genre, url: '/admin/genres', method: :post do |f| %>
         <strong>ジャンル名</strong>
         <label class="px-5 mt-5"><%= f.text_field :name %></label>
