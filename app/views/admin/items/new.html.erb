@@ -3,9 +3,23 @@
      <h4><strong class="bg-light px-3">商品新規登録</strong></h4>
    </p>
    <div class="row mx-auto" style="width: 600px;">
-     <%= form_with model: @item, local: true do |f| %>
-     <strong>商品画像</strong>
-     <label class="px-5 mt-5"><%= f.attachment_field :thumbnail %></label>
-     <% end %>
+     <form>
+        <%= form_with model: @item, local: true do |f| %>
+        <div class="form-group">
+           <strong>商品画像</strong>
+           <label class="px-5 mt-5"><%= f.attachment_field :thumbnail %></label>
+        </div>
+          <br>
+        <div class="form-group">
+           <strong>商品名</strong>
+           <label class="px-5"><%= f.text_field :name %></label>
+        </div>
+           <br>
+        <div class="form-group">
+           <strong>商品説明</strong>
+           <label class="px-5"><%= f.text_area :introduction %></label>
+        </div>
+        <% end %>
+     </form>
    </div>
 </div>
