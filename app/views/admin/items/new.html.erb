@@ -1,24 +1,56 @@
 <div class="container mx-auto">
-   <p class="mt-5" style="width: 200px;">
-     <h4><strong class="bg-light px-3">商品新規登録</strong></h4>
-   </p>
-   <div class="row mx-auto" style="width: 600px;">
-     <form>
+    <p class="mt-5">
+        <h4 class="mb-5"><strong class="bg-light px-3">商品新規登録</strong></h4>
+    </p>
+    <form>
         <%= form_with model: @item, local: true do |f| %>
-        <div class="form-group">
-           <strong>商品画像</strong>
-           <label class="px-5 mt-5"><%= f.attachment_field :thumbnail %></label>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">商品画像</label>
+            <div class="col-sm-6">
+                <input type="file">
+            </div>
         </div>
-          <br>
-        <div class="form-group">
-           <strong>商品名</strong>
-           <label class="px-5"><%= f.text_field :name %></label>
+        <div class="row mb-3">
+           <label class="col-sm-2 col-form-label">商品名</label>
+           <div class="col-sm-6">
+               <input type="name" class="form-control" id="itemname" placeholder="商品名">
+            </div>
         </div>
-           <br>
-        <div class="form-group">
-           <strong>商品説明</strong>
-           <label class="px-5"><%= f.text_area :introduction %></label>
+        <div class="row mb-3">
+           <label class="col-sm-2 col-form-label">商品説明</label>
+           <div class="col-sm-6">
+               <textarea class="form-control" id="itemintroduction" rouws="3" placeholder="ここに説明文を記述します"></textarea>
+            </div>
         </div>
+        <div class="row mb-3">
+           <label class="col-sm-2 col-form-label">ジャンル</label>
+           <div class="col-sm-6">
+               <select class="form-select" id="jenre">
+                   <option selected>--選択してください--</option>
+                   <% @genres.each do |genre| %>
+                   <option value="1"><%= genre.name %></option>
+                   <% end %>
+               </select>
+            </div>
+        </div>
+         <div class="row mb-3">
+           <label class="col-sm-2 col-form-label">税抜価格</label>
+           <div class="col-sm-6">
+               <input class="form-control" id="price" placeholder="1000">
+            </div>
+        </div>
+        <div class="row mb-3">
+           <label class="col-sm-2 col-form-label">販売ステータス</label>
+           <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" name="status" id="sale">
+               <label class="form-check-label" for="sale">販売中</label>
+            </div>
+            <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" name="status" id="stop">
+               <label class="form-check-label" for="stop">販売停止中</label>
+            </div>
+        </div>
+        <div class="text-center"><%= f.submit '新規登録', class: "btn btn-success px4" %></div>
         <% end %>
      </form>
    </div>
