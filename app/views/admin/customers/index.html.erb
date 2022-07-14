@@ -1,0 +1,28 @@
+<div class="container mx-auto">
+  <p class="mt-5">
+    <h4 class="mb-5"><strong class="bg-light px-3">会員一覧</strong></h4>
+  </p>
+  <div class="row">
+    <table class="table">
+      <thead class="bg-light">
+        <tr>
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <% @customers.each do |customer| %>
+      <tbody>
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= customer.last_name.first_name %></td>
+          <td><%= customer.email %></td>
+          <td><%= customer.is_active %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+  <%= paginate @customers %>
+</div>

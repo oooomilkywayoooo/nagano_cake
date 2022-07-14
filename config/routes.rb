@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :admins, controllers: {
     sessions:        'admins/sessions',
     passwords:       'admins/passwords',
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
   end
 
 

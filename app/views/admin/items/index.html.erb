@@ -1,6 +1,9 @@
 <div class="container mx-auto">
   <p class="mt-5">
     <h4 class="mb-5"><strong class="bg-light px-3">商品一覧</strong></h4>
+    <%= link_to new_admin_item_path  do %>
+      <div class="d-inlineblock text-right"><i class="fas fa-plus"></i></div>
+    <% end %>
   </p>
   <div class="row">
     <table class="table">
