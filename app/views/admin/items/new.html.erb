@@ -7,36 +7,31 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">商品画像</label>
             <div class="col-sm-6">
-                <input type="file">
+                <%= f.attachment_field :thumbnail %>
             </div>
         </div>
         <div class="row mb-3">
            <label class="col-sm-2 col-form-label">商品名</label>
            <div class="col-sm-6">
-               <input type="name" class="form-control" id="itemname" placeholder="商品名">
+               <%= f.text_field :name, class: "form-control", id: "itemname", placeholder: "商品名" %>
             </div>
         </div>
         <div class="row mb-3">
            <label class="col-sm-2 col-form-label">商品説明</label>
            <div class="col-sm-6">
-               <textarea class="form-control" id="itemintroduction" rouws="3" placeholder="ここに説明文を記述します"></textarea>
+               <%= f.text_area :introduction, class: "form-control", id: "itemintroduction", rouws: "3", placeholder: "ここに説明文を記述します" %>
             </div>
         </div>
         <div class="row mb-3">
            <label class="col-sm-2 col-form-label">ジャンル</label>
            <div class="col-sm-6">
-               <select class="form-select" id="jenre">
-                   <option selected>--選択してください--</option>
-                   <% @genres.each do |genre| %>
-                   <option value="1"><%= genre.name %></option>
-                   <% end %>
-               </select>
+               <%= f.select :genre, {'ケーキ': 1, 'プリン': 2, '焼き菓子': 3, 'キャンディ': 4}, { include_blank: '--選択してください--'}, { class: 'form-control' , required: true } %>
             </div>
         </div>
          <div class="row mb-3">
            <label class="col-sm-2 col-form-label">税抜価格</label>
            <div class="col-sm-6">
-               <input class="form-control" id="price" placeholder="1000">
+               <%= f.text_field :price, class: "form-control", id: "price", placeholder: "1000">
             </div>
         </div>
         <div class="row mb-3">
