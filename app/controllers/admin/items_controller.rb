@@ -1,7 +1,6 @@
 class Admin::ItemsController < ApplicationController
   def index
-    @items = Item.all
-    @items = Item.page(params[:page])
+    @items = Item.all.page(params[:page])
   end
 
   def new
@@ -15,7 +14,8 @@ class Admin::ItemsController < ApplicationController
     binding.pry
 
     if @item.save
-      redirect_to admin_item_path(@item.id)
+      flash[:notice] = "新商品を登録しました"
+      redirect_to admin_item_path(@item)
     else
       render :new
     end
@@ -23,6 +23,7 @@ class Admin::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @genre = Genre.find(params[:id])
   end
 
   def edit

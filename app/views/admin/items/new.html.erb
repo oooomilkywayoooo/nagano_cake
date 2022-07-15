@@ -2,12 +2,20 @@
     <p class="mt-5">
         <h4 class="mb-5"><strong class="bg-light px-3">商品新規登録</strong></h4>
     </p>
+    <% if @item.errors.any? %>
+        <%= @item.errors.count %>件のエラーが発生しました
+            <ul>
+                <% @item.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+    <% end %>
     <form>
         <%= form_with model: @item, url: '/admin/items', method: :post do |f| %>
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">商品画像</label>
             <div class="col-sm-6">
-                <%= f.file_field :image, accept: "image/*" %>
+                <%= f.attachment_field :image, class: "image" %>
             </div>
         </div>
         <div class="row mb-3">
@@ -25,7 +33,7 @@
         <div class="row mb-3">
            <label class="col-sm-2 col-form-label">ジャンル</label>
            <div class="col-sm-6">
-               <%= f.select :genre_id, {'ケーキ': 1, 'プリン': 2, '焼き菓子': 3, 'キャンディ': 4}, { include_blank: '--選択してください--'}, { class: 'form-control' , required: true } %>
+               <%= f.collection_select :genre_id, Genre.all, :id, :name, :include_blank => "--選択してください--", class: 'form-control' %>
             </div>
         </div>
          <div class="row mb-3">
