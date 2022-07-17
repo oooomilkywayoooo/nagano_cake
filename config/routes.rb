@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     passwords:     'customers/passwords',
     registrations: 'customers/registrations'
   }
+  get '/admin' => 'admin/homes#top'
   get '/' => 'public/homes#top'
   get '/about' => 'public/homes#about'
 

@@ -1,0 +1,27 @@
+<div class="container">
+  <p class="mt-5" style="width: 200px;">
+    <h4 class="mb-5"><strong class="bg-light px-3">注文履歴一覧</strong></h4>
+  </p>
+  <div class="row">
+    <table class="table">
+      <thead class="bg-light">
+        <tr>
+          <th>購入日時</th>
+          <th>購入者</th>
+          <th>注文個数</th>
+          <th>注文ステータス</th>
+        </tr>
+      </thead>
+      <% @orders_details.each do |orders_detail| %>
+      <tbody>
+        <tr>
+          <td><%= orders_detail.create_at %></td>
+          <td><%= orders_detail_id.customer.last_name.first_name %></td>
+          <td><%= orders_detail.amount %></td>
+          <td><%= orders_detail.making_status %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -2,33 +2,31 @@
   <p class="mt-5">
     <h4 class="mb-5"><strong class="bg-light px-3"><%= @customer.last_name.first_name %>さんの会員詳細</strong></h4>
   </p>
+  <div class="row"></div>
   <div class="customer">
     <p>会員ID</p>
     <p class="d-inlineblock"><%= @customer.id %></p>
   </div>
-  <div class="customer">
+  <div class="col-lg-4">
     <p>氏名</p>
-    <p class="d-inlineblock"><%= @customer.last_name %> <%= @customer.first_name %></p>
-  </div>
-  <div class="customer">
     <p>郵便番号</p>
-    <p class="d-inlineblock"><%= @customer.postal_code %></p>
-  </div>
-  <div class="customer">
     <p>住所</p>
-    <p class="d-inlineblock"><%= @customer.address %></p>
-  </div>
-  <div class="customer">
     <p>電話番号</p>
-    <p class="d-inlineblock"><%= @customer.telephone_number %></p>
-  </div>
-  <div class="customer">
     <p>メールアドレス</p>
-    <p class="d-inlineblock"><%= @customer.email %></p>
-  </div>
-  <div class="customer">
     <p>会員ステータス</p>
-    <p class="d-inlineblock"><%= @customer.is_active %></p>
+  </div>
+  <div class="col-lg-8">
+    <p><%= @customer.last_name %> <%= @customer.first_name %></p>
+    <p><%= @customer.postal_code %></p>
+    <p><%= @customer.address %></p>
+    <p><%= @customer.telephone_number %></p>
+    <p><%= @customer.email %></p>
+    <p><%if @customer.is_active == true %>
+        有効
+       <% else @customer.is_active == false %>
+        無効
+       <% end %>
+    </p>
   </div>
   <div class="text-center"><%= link_to "編集する", edit_admin_customer_path(customer.id), class: "btn btn-success px3" %></div>
   <div class="d-inlineblock text-center"><%= link_to "注文履歴一覧を見る", '/orders', class: "btn btn-primary px3" %></div>

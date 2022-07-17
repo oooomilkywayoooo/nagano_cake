@@ -2,73 +2,71 @@
   <p class="mt-5" style="width: 200px;">
     <h4><strong class="bg-light px-3">新規会員登録</strong></h4>
   </p>
-    <%= form_with model: @customer, url: new_customer_registration_path, method: :post do |f| %>
+    <%= form_with model: @customer, url: customer_registration_path, method: :post do |f| %>
     <%= render "customers/shared/error_messages", resource: resource %>
     <div class="row mb-3">
-      <label><%= f.label :"名前　　" %></label>
+      <%= f.label :"名前　　" %>
       <div class="col-sm-3">
-        <label class="mr-3">(姓)</label>
+        <%= f.label :"(姓)", class: "mr-3" %>
         <div class="mr-3">
           <%= f.text_field :last_name, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "last_name" %>
         </div>
       </div>
       <div class="col-sm-3">
-        <label class="mr-3">(名)</label>
+        <%= f.label :"(名)", class: "mr-3" %>
           <%= f.text_field :first_name, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "first_name" %>
       </div>
     </div>
     <div class="row mb-3">
-      <label><%= f.label :"フリガナ" %></label>
+      <%= f.label :"フリガナ" %>
         <div class="col-sm-3">
-          <label class="mr-3">(セイ)</label>
+          <%= f.label :"(セイ)", class: "mr-3" %>
           <div class="mr-3">
             <%= f.text_field :last_name_kana, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "last_name_kana" %>
           </div>
         </div>
       <div class="col-sm-3">
-        <label class="mr-3">(メイ)</label>
+        <%= f.label :"(メイ)", class: "mr-3" %>
         <%= f.text_field :first_name_kana, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "first_name_kana" %>
       </div>
     </div>
     <div class="row mb-3">
-      <label class="col-sm-3 col-form-label"><%= f.label :"メールアドレス" %></label>
+      <%= f.label :"メールアドレス", class: "col-sm-3 col-form-label" %>
         <div class="col-sm-3">
           <%= f.email_field :email, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "email" %>
         </div>
     </div>
     <div class="row mb-3">
-      <label class="col-sm-3 col-form-label"><%= f.label :"郵便番号(ハイフンなし)" %></label>
+      <%= f.label :"郵便番号(ハイフンなし)", class: "col-sm-3 col-form-label" %>
         <div class="col-sm-3">
           <%= f.text_field :postal_code, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "postal_code" %>
         </div>
     </div>
     <div class="row mb-3">
-      <label class="col-sm-3 col-form-label"><%= f.label :"住所" %></label>
+      <%= f.label :"住所", class: "col-sm-3 col-form-label" %>
         <div class="col-sm-3">
           <%= f.text_area :address, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "address" %>
         </div>
     </div>
     <div class="row mb-3">
-      <label class="col-sm-3 col-form-label"><%= f.label :"電話番号(ハイフンなし)" %></label>
+      <%= f.label :"電話番号(ハイフンなし)", class: "col-sm-3 col-form-label" %>
         <div class="col-sm-3">
           <%= f.text_field :telephone_number, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "telephone_number" %>
         </div>
     </div>
     <div class="row mb-3">
-      <label class="col-sm-3 col-form-label">
+      <div class="col-sm-3 col-form-label">
         <%= f.label :"パスワード" %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %>文字以上)</em>
         <% end %>
-      </label>
+      </div>
       <div class="col-sm-3">
         <%= f.password_field :password, class: "form-control d-{inline-block}", autocomplete: "new-password" %>
       </div>
     </div>
     <div class="row mb-3">
-      <label class="col-sm-3 col-form-label">
-        <%= f.label :"パスワード(確認用)" %>
-      </label>
+        <%= f.label :"パスワード(確認用)", class: "col-sm-3 col-form-label" %>
       <div class="col-sm-3">
         <%= f.password_field :password_confirmation, class: "form-control d-{inline-block}", autocomplete: "new-password" %>
       </div>
