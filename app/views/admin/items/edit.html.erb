@@ -1,1 +1,54 @@
-Admin#edit
+<div class="container mx-auto">
+    <p class="mt-5">
+        <h4 class="mb-5"><strong class="bg-light px-3">商品編集</strong></h4>
+    </p>
+    <% if @item.errors.any? %>
+        <%= @item.errors.count %>件のエラーが発生しました
+            <ul>
+                <% @item.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+    <% end %>
+        <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
+        <div class="row mb-3">
+            <%= f.label :"商品画像", class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-6">
+              <%= f.file_field :image, accept: "image/*" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"商品名", class: "col-sm-2 col-form-label"%>
+           <div class="col-sm-6">
+               <%= f.text_field :name, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"商品説明", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_area :introduction, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"ジャンル", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.collection_select :genre_id, @genres, :id, :name %>
+            </div>
+        </div>
+         <div class="row mb-3">
+           <%= f.label :"税抜価格", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_field :price, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <%= f.label :"販売ステータス", class: "col-sm-2 col-form-label" %>
+            <div class="form-check form-check-inline">
+                <label><%= f.radio_button :is_active, "true" %>販売中</label>
+                <label class="ml-4"><%= f.radio_button :is_active, "false" %>販売停止中</label>
+            </div>
+        </div>
+        <div class="text-center"><%= f.submit '変更を保存', class: "btn btn-success px4" %></div>
+        <% end %>
+   </div>
+</div>

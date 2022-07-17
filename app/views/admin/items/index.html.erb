@@ -20,14 +20,24 @@
       <tbody>
         <tr>
           <td><%= item.id %></td>
-          <td><%= item.name %></td>
+          <td>
+            <%= link_to admin_item_path(item) do %>
+              <%= item.name %>
+            <% end %>
+          </td>
           <td><%= item.price %></td>
-          <td><%= item.genre_id %></td>
-          <td><%= item.is_active %></td>
+          <td><%= item.genre.name %></td>
+          <td>
+            <% if item.is_active == true %>
+              <P>販売中</P>
+            <% elsif item.is_active == false %>
+              <P>販売停止中</P>
+            <% end %>
+          </td>
         </tr>
       </tbody>
       <% end %>
     </table>
   </div>
-  <%= paginate @items %>
+  <div class="text-center"><%= paginate(@items) %></div>
 </div>
