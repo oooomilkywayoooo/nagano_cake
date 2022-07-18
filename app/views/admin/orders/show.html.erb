@@ -1,0 +1,27 @@
+<div class="container mx-auto">
+  <p class="mt-5">
+    <h4 class="mb-5"><strong class="bg-light px-3">注文履歴詳細</strong></h4>
+  </p>
+  <div class="rou">
+    <div class="col-lg-3">
+      <p class="mt-2 mb-2"><strong>購入者</strong></p>
+      <p class="mt-2 mb-2"><strong>注文日</strong></p>
+      <p class="mt-2 mb-4"><strong>配送先</strong></p>
+      <p class="mt-2 mb-2"><strong>支払方法</strong></p>
+      <p class="mt-2 mb-4"><strong>注文ステータス</strong></p>
+    </div>
+    <div class="col-lg-9">
+      <% @ordrs.each do |order| %>
+        <p>
+          <%= link_to public_customer_path do %>
+            <%= order.customers.name %>
+          <% end %>
+        </p>
+        <p><%= order.created_at %></p>
+        <p><%= order.ship_address %></p>
+        <p><%= order.ship_name %></p>
+        <p><%= order.payment_mrthod %></p>
+        <p><%= order.order_status %></p>
+    </div>
+  </div>
+</div>
