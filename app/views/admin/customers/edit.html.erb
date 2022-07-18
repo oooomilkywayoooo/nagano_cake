@@ -1,2 +1,68 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class="container mx-auto">
+    <p class="mt-5">
+        <h4 class="mb-5"><strong class="bg-light px-3"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</strong></h4>
+    </p>
+    <% if @customer.errors.any? %>
+        <%= @customer.errors.count %>件のエラーが発生しました
+            <ul>
+                <% @customer.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+    <% end %>
+        <%= form_with model: @customer, url: admin_item_path(@customer.id), method: :patch do |f| %>
+        <div class="row mb-3">
+            <p>会員ID</p>
+            <div class="col-sm-6">
+              <%= @customer.id %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"氏名", class: "col-sm-2 col-form-label"%>
+           <div class="col-sm-6">
+               <%= f.text_field :last_name, class: "form-control" %>
+               <%= f.text_field :first_name, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"フリガナ", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_field :last_name_kana, class: "form-control" %>
+               <%= f.text_field :first_name_kana, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"郵便番号", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_field :postal_code, class: "form-control" %>
+            </div>
+        </div>
+         <div class="row mb-3">
+           <%= f.label :"住所", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_area :address, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"電話番号", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_field :telephone_number, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+           <%= f.label :"メールアドレス", class: "col-sm-2 col-form-label" %>
+           <div class="col-sm-6">
+               <%= f.text_field :email, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <%= f.label :"会員ステータス", class: "col-sm-2 col-form-label" %>
+            <div class="form-check form-check-inline">
+                <label><%= f.radio_button :is_active, "true" %>有効</label>
+                <label class="ml-4"><%= f.radio_button :is_active, "false" %>退会</label>
+            </div>
+        </div>
+        <div class="text-center"><%= f.submit '変更を保存', class: "btn btn-success px4" %></div>
+        <% end %>
+   </div>
+</div>
