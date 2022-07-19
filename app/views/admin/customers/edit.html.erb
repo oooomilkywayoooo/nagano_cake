@@ -10,7 +10,7 @@
                 <% end %>
             </ul>
     <% end %>
-        <%= form_with model: @customer, url: admin_item_path(@customer.id), method: :patch do |f| %>
+        <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
         <div class="row mb-3">
             <p>会員ID</p>
             <div class="col-sm-6">
@@ -19,16 +19,16 @@
         </div>
         <div class="row mb-3">
            <%= f.label :"氏名", class: "col-sm-2 col-form-label"%>
-           <div class="col-sm-6">
+           <div class="col-sm-6 form-inline">
                <%= f.text_field :last_name, class: "form-control" %>
-               <%= f.text_field :first_name, class: "form-control" %>
+               <span class="pl-5"><%= f.text_field :first_name, class: "form-control" %></span>
             </div>
         </div>
         <div class="row mb-3">
            <%= f.label :"フリガナ", class: "col-sm-2 col-form-label" %>
-           <div class="col-sm-6">
+           <div class="col-sm-6 form-inline">
                <%= f.text_field :last_name_kana, class: "form-control" %>
-               <%= f.text_field :first_name_kana, class: "form-control" %>
+               <span class="pl-5"><%= f.text_field :first_name_kana, class: "form-control" %></span>
             </div>
         </div>
         <div class="row mb-3">
@@ -62,7 +62,7 @@
                 <label class="ml-4"><%= f.radio_button :is_active, "false" %>退会</label>
             </div>
         </div>
-        <div class="text-center"><%= f.submit '変更を保存', class: "btn btn-success px4" %></div>
+        <div class="text-center mb-5"><%= f.submit '変更を保存', class: "btn btn-success px4" %></div>
         <% end %>
    </div>
 </div>

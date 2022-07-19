@@ -3,26 +3,28 @@
     <h4 class="mb-5"><strong class="bg-light px-3"><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</strong></h4>
   </p>
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <p>会員ID</p>
       <p>氏名</p>
+      <p>フリガナ</p>
       <p>郵便番号</p>
       <p>住所</p>
       <p>電話番号</p>
       <p>メールアドレス</p>
       <p>会員ステータス</p>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <p><%= @customer.id %></p>
       <p><%= @customer.last_name %> <%= @customer.first_name %></p>
+      <p><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></p>
       <p><%= @customer.postal_code %></p>
       <p><%= @customer.address %></p>
       <p><%= @customer.telephone_number %></p>
       <p><%= @customer.email %></p>
       <p><%if @customer.is_active == true %>
-          有効
+          <p class="text-success"><strong>有効</strong></p>
          <% else @customer.is_active == false %>
-          無効
+          <p class="text-secondary"><strong>退会</strong></p>
          <% end %>
       </p>
     </div>

@@ -5,30 +5,22 @@
     <%= form_with model: @customer, url: customer_registration_path, method: :post do |f| %>
     <%= render "customers/shared/error_messages", resource: resource %>
     <div class="row mb-3">
-      <%= f.label :"名前　　" %>
-      <div class="col-sm-3">
-        <%= f.label :"(姓)", class: "mr-3" %>
-        <div class="mr-3">
-          <%= f.text_field :last_name, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "last_name" %>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <%= f.label :"(名)", class: "mr-3" %>
-          <%= f.text_field :first_name, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "first_name" %>
+      <%= f.label :"名前", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-6 form-inline">
+        <%= f.label :"(姓)　", class: "mr-3" %>
+        <%= f.text_field :last_name, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "last_name" %>
+        <%= f.label :"(名)　", class: "mr-3 ml-2" %>
+        <%= f.text_field :first_name, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "first_name" %>
       </div>
     </div>
     <div class="row mb-3">
-      <%= f.label :"フリガナ" %>
-        <div class="col-sm-3">
+      <%= f.label :"フリガナ", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-6 form-inline">
           <%= f.label :"(セイ)", class: "mr-3" %>
-          <div class="mr-3">
-            <%= f.text_field :last_name_kana, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "last_name_kana" %>
-          </div>
+          <%= f.text_field :last_name_kana, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "last_name_kana" %>
+          <%= f.label :"(メイ)", class: "mr-3 ml-2" %>
+          <%= f.text_field :first_name_kana, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "first_name_kana" %>
         </div>
-      <div class="col-sm-3">
-        <%= f.label :"(メイ)", class: "mr-3" %>
-        <%= f.text_field :first_name_kana, class: "form-control d-{inline-block}", autofocus: true, autocomplete: "first_name_kana" %>
-      </div>
     </div>
     <div class="row mb-3">
       <%= f.label :"メールアドレス", class: "col-sm-3 col-form-label" %>
