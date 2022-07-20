@@ -1,2 +1,34 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="border">
+        <p class="text-center border-bottom"><strong>ジャンル検索</strong></p>
+        <% @genres.each do |genre| %>
+        <p><%= genre.name %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-9">
+      <div class="mx-auto text-center jumbotron">
+        <p><strong>ようこそ、ながのCAKEへ！</strong></p>
+        <p><strong>このサイトは、ケーキ販売のECサイトになります。</strong></p>
+        <p><strong>会員でない方も商品の閲覧はできますが、</strong></p>
+        <p><strong>購入には会員登録が必要になります。</strong></p>
+      </div>
+    </div>
+
+    <div class="col-lg-9 ml-5">
+      <h1>新着商品</h1>
+      <% @items.each do |item| %>
+      <div class="d-flex">
+        <div class="item mx-5">
+          <%= image_tag item.image, size: "200x150" if item.image.present? %>
+          <p><%= item.name %></p>
+          <p>￥<%= item.price %></p>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
