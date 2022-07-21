@@ -14,26 +14,28 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/"><h1><strong>Nagano Cake</strong></h1></a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span></button>
-        <div class="navbar-collapse collapse" id="navbarNavDropdown" style>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <% if admin_signed_in? %>
-              <li><%= link_to '商品一覧', admin_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to '会員一覧', admin_customers_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to '注文履歴一覧', "/admin", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to 'ジャンル一覧', admin_genres_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item active"><%= link_to '商品一覧', admin_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to '会員一覧', admin_customers_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to '注文履歴一覧', "/admin", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to 'ジャンル一覧', admin_genres_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
             <% elsif customer_signed_in? %>
-              <li><%= link_to 'マイページ', "＃", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to '商品一覧', public_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to 'カート', "#", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item active"><%= link_to 'マイページ', "#", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to '商品一覧', public_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to 'カート', "#", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
             <% else %>
-              <li><%= link_to 'About', "/about", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to '商品一覧', admin_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to '新規登録', new_customer_registration_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
-              <li><%= link_to 'ログイン', new_customer_session_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item active"><%= link_to 'About', "/about", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to '商品一覧', admin_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to '新規登録', new_customer_registration_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item"><%= link_to 'ログイン', new_customer_session_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
             <% end %>
           </ul><br>
           <form class="navbar-form">
@@ -47,12 +49,12 @@
     </nav>
   </header>
 
-  <body>
-  <div class="ml-5 mt-5">
-  <% flash.each do |message_type, message| %>
-    <%= content_tag :div, message, class: "notice pb-16" %>
-  <% end %>
-  </div>
-  <%= yield %>
-  </body>
+  <main class="mt-5">
+    <% flash.each do |message_type, message| %>
+      <%= content_tag :div, message, class: "notice pb-16" %>
+    <% end %>
+    <%= yield %>
+  </main>
+
+  <footer class="footer mt-auto py-3 bg-light" style="height: 100px;"></footer>
 </html>

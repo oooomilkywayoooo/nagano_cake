@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row top">
     <div class="col-lg-3">
       <div class="border">
         <p class="text-center border-bottom"><strong>ジャンル検索</strong></p>
@@ -17,18 +17,28 @@
         <p><strong>購入には会員登録が必要になります。</strong></p>
       </div>
     </div>
-
-    <div class="col-lg-9 ml-5">
-      <h1>新着商品</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <h1>新着商品</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 d-flex">
       <% @items.each do |item| %>
-      <div class="d-flex">
-        <div class="item mx-5">
-          <%= image_tag item.image, size: "200x150" if item.image.present? %>
-          <p><%= item.name %></p>
-          <p>￥<%= item.price %></p>
-        </div>
+      <p class="mx-5 mt-3">
+        <%= image_tag item.image, size: "200x120"%>
+        <span class="text-center d-block"><%= item.name %></span>
+        <span class="text-center d-block">￥<%= item.price %></span>
+      </p>
       <% end %>
-      </div>
     </div>
   </div>
+</div>
+<div class="container">
+  <%= link_to public_items_path do %>
+    <p class="text-right mt-3">全ての商品を見る＞＞</p>
+  <% end %>
 </div>
