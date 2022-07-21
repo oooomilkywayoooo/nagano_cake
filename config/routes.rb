@@ -13,9 +13,14 @@ Rails.application.routes.draw do
 
   namespace :public do
     resources :items, only: [:index, :show]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :customers, only: [:show, :edit, :update] do
       get '/quit' => 'customers#quit'
       patch '/out' => 'customers#out'
+    end
+    resources :orders, only: [:new, :index, :create, :show] do
+      get '/thanks' => 'orders#thanks'
+      post '/info' => 'orders#info'
     end
   end
 

@@ -27,7 +27,7 @@
               <li class="nav-item"><%= link_to 'ジャンル一覧', admin_genres_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
               <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
             <% elsif customer_signed_in? %>
-              <li class="nav-item active"><%= link_to 'マイページ', "#", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
+              <li class="nav-item active"><%= link_to 'マイページ', public_customer_path(@customer.id), class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
               <li class="nav-item"><%= link_to '商品一覧', public_items_path, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
               <li class="nav-item"><%= link_to 'カート', "#", class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>
               <li class="nav-item"><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'd-{inline-block} mr-5 px-3 nav-link text-light btn btn-secondary'%></li>

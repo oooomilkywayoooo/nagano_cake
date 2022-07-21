@@ -11,11 +11,11 @@ class Order < ApplicationRecord
   def sum_of_price
     item.add_tax_price * amount
   end
-  
+
   def shipping_fee
     800
   end
-  
+
   def total_amount_billed
     @total + shipping_fee
   end
