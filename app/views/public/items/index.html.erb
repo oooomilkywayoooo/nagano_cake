@@ -1,1 +1,27 @@
-＃itemindex
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="border">
+        <p class="text-center border-bottom"><strong>ジャンル検索</strong></p>
+        <% @genres.each do |genre| %>
+        <p><%= genre.name %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-9 d-flex flex-column mt-3">
+      <h1>商品一覧</h1><h4>(全<%= @items.count %>件)</h4>
+      <div class="d-flex">
+        <% @items.each do |item| %>
+        <p class="mx-2 mt-3">
+          <%= link_to public_item_path(item) do %>
+            <%= image_tag item.image, size: "200x120"%>
+            <span class="text-center d-block"><%= item.name %></span>
+          <% end %>
+          <span class="text-center d-block">￥<%= item.price %></span>
+        </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       get '/quit' => 'customers#quit'
       patch '/out' => 'customers#out'
     end
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+      delete '/all_destroy' => 'cart_items#all_destroy'
+    end
     resources :orders, only: [:new, :index, :create, :show] do
       get '/thanks' => 'orders#thanks'
       post '/info' => 'orders#info'

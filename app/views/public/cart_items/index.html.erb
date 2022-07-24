@@ -1,0 +1,31 @@
+<div class="container mx-auto">
+  <p class="mt-5">
+  <h4 class="mb-5"><strong class="bg-light px-3">ショッピングカート</strong></h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <table class="table table-bordered">
+      <thead class="bg-light">
+        <tr>
+          <th>商品名</th>
+          <th>単価(税込)</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @cart_items.each do |cart_item| %>
+      <tbody>
+        <tr>
+          <td><%= cart_item.item.name %></td>
+          <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+          <td><%= cart_item.amount%></td>
+          <td><%= cart_item.sum_of_price %></td>
+          <td><%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger px-2" %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
