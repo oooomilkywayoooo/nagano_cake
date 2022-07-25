@@ -18,10 +18,11 @@
         <h3><strong><%= @item.name %></strong></h3>
         <h5><%= @item.introduction %></h5>
         <h4 class="mt-5">￥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</h4>
-        
+
         <% if @item.is_active == true %>
           <%= form_with model: @cart_item, url: public_cart_items_path, method: :post do |f| %>
           <div class="mt-4">
+            <%= f.hidden_field :item_id, value:@item.id %>
            <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10], prompt: "個数選択　　", class: "form-control" %>
            <%= f.submit 'カートに入れる', class: "btn btn-success px-2 ml-5" %>
           </div>

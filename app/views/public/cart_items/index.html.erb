@@ -1,6 +1,13 @@
 <div class="container mx-auto">
-  <p class="mt-5">
-  <h4 class="mb-5"><strong class="bg-light px-3">ショッピングカート</strong></h4>
+  <div class="row">
+    <div class="col-lg-3">
+      <h4 class="mb-5"><strong class="bg-light px-3">ショッピングカート</strong></h4>
+    </div>
+    <div class="col-lg-6"></div>
+    <div class="col-lg-3 text-right mb-5">
+      <%= link_to "カートを空にする", public_cart_item_all_destroy_path(@cart_items), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger px-2" %>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -25,17 +32,41 @@
             </td>
             <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
             <td>
-              <%= form_with model: cart_item, url: public_cart_item_path(cart_item), method: :patch do |f| %>
-                <%= f.number_field :amout, min:1, max: 10 %>
+              <% @cart_item = CartItem.find(cart_item.id) %>
+              <%= form_with model: @cart_item, url: public_cart_item_path(@cart_item), method: :patch do |f| %>
+                <%= f.number_field :amount, in: 1..10, value:cart_item.amount %>
                 <%= f.submit "変更", class: "btn btn-success" %>
               <% end %>
             </td>
             <td><%= cart_item.sum_of_price %></td>
-            <td><%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger px-2" %></td>
+            <td><%= link_to "削除する", public_cart_item_path(@cart_item.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger px-2" %></td>
           </tr>
         </tbody>
         <% end %>
       <% end %>
     </table>
   </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary px-2" %>
+    </div>
+    <div class="col-lg-6"></div>
+    <div class="col-lg-3">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="bg-light" style="width: 50%;">合計金額</td>
+            <td style="width: 50%;"><%= @total.round.to_s(:delimited) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center my-5">
+  <%= link_to "情報入力に進む", new_public_order_path, class: "btn btn-success px-2" %>
 </div>
