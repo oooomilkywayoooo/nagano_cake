@@ -5,8 +5,8 @@ class Order < ApplicationRecord
   validates :customer_id, :ship_address, :ship_name, :payment_mrthod, :amount_billed, presence: true
   validates :ship_postalcode, length: {is: 7}, numericality: {only_integer: true }
 
-  enum payment_method: {"クレジットカード": 0, "銀行振込": 1}
-  enum order_status: {"入金待ち": 0, "入金確認": 1, "製作中": 2, "発送準備中": 3, "発送済み": 4}
+  enum payment_method: {"credit_card": 0, "transfer": 1}
+  enum order_status: {"wait": 0, "check": 1, "making": 2, "preparation": 3, "done": 4}
 
   def sum_of_price
     item.add_tax_price * amount
