@@ -3,7 +3,7 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
     @order = Order.new
     @name = current_customer.last_name + current_customer.first_name
-    @address = current_customer.postal_code + current_customer.address
+    @address = current_customer.postal_code + '　' + current_customer.address
   end
 
   def create
