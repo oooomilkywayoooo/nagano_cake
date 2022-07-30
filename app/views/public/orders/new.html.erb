@@ -3,7 +3,7 @@
   <h4 class="mb-5"><strong class="bg-light px-3">注文情報入力画面</strong></h4>
 </div>
 
-<%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
+<%= form_with model: @order, url: public_orders_info_path, method: :post do |f| %>
 <div class="container">
   <div class="row">
     <strong><%= f.label :payment_method,"支払方法" %></strong>
@@ -47,7 +47,7 @@
     <div class="col-lg-8 ml-5">
       <%= f.radio_button :select_address, "1" %>
       <%= f.label :ship_address, "登録済み住所から選択" %>
-      </br><span class="ml-3"><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display), class: "form-control" %></span>
+      </br><span class="ml-3"><%= f.select :address_id, options_from_collection_for_select(current_customer.addresses, :id, :address_display), class: "form-control" %></span>
     </div>
   </div>
 </div>
@@ -64,29 +64,27 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-3 ml-5 pl-4">
-      <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+      <%= f.label :ship_postalcode, "郵便番号(ハイフンなし)" %>
     </div>
     <div class="col-lg-3">
-      <%= f.text_field :postal_code, class: "form-control" %>
+      <%= f.text_field :ship_postalcode, class: "form-control" %>
     </div>
     <div class="col-lg-5"></div>
     <div class="col-lg-3 ml-5 pl-4 mt-2">
-      <%= f.label :address, "住所" %>
+      <%= f.label :ship_address, "住所" %>
     </div>
      <div class="col-lg-6 mt-2">
-      <%= f.text_area :address, class: "form-control", rows: "1" %>
+      <%= f.text_area :ship_address, class: "form-control", rows: "1" %>
     </div>
     <div class="col-lg-3 ml-5 pl-4 mt-2">
-      <%= f.label :name, "宛名" %>
+      <%= f.label :ship_name, "宛名" %>
     </div>
     <div class="col-lg-3 mt-2">
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :ship_name, class: "form-control" %>
     </div>
   </div>
 </div>
-
 <div class="container text-center my-5">
   <%= f.submit "確認画面へ進む", class: "btn btn-primary px-2"%>
 </div>
 <% end %>
-

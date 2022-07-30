@@ -7,30 +7,35 @@
   <div class="row">
     <div class="col-lg-8">
       <table class="table table-bordered">
-      <thead class="bg-light">
-        <tr>
-          <th>商品名</th>
-          <th>単価(税込)</th>
-          <th>数量</th>
-          <th>小計</th>
-        </tr>
-      </thead>
-      <%if current_customer.cart_items.present? %>
-        <% @cart_items.each do |cart_item| %>
-        <tbody>
+        <thead class="bg-light">
           <tr>
-            <td>
-              <%= image_tag cart_item.item.image, size: "60x50", fallback: "no_image1.jpeg" %>
-              <%= cart_item.item.name %>
-            </td>
-            <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
-            <td><%= cart_item.amount %></td>
-            <td><%= cart_item.sum_of_price %></td>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
           </tr>
-        </tbody>
+        </thead>
+        <%if current_customer.cart_items.present? %>
+          <% @cart_items.each do |cart_item| %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= image_tag cart_item.item.image, size: "60x50", fallback: "no_image1.jpeg" %>
+                  <%= cart_item.item.name %>
+                </td>
+                <td><%= cart_item.item.add_tax_price.to_s(:delimited) %></td>
+                <td><%= cart_item.amount %></td>
+                <td><%= cart_item.sum_of_price %></td>
+              </tr>
+            </tbody>
+          <% end %>
         <% end %>
-      <% end %>
     </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
     <div class="col-lg-3">
       <table class="table table-bordered">
         <tbody>
@@ -38,10 +43,23 @@
           <td style="width: 50%;"><%= @order.shipping_fee %></td></tr>
           <tr><th class="bg-light" style="width: 50%;">商品合計</th>
           <td style="width: 50%;"><%= @total.round.to_s(:delimited) %></td></tr>
-          <tr><th class="bg-light" style="width: 50%;">請求金額</th>
-          <td style="width: 50%;"><%= @shipping_fee + @total.round.to_s(:delimited) %></td></tr>
+          <tr><th class="bg-light style="width: 50%;"">請求金額</th>
+          <td style="width: 50%;"><%= @amount_billed %></td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div>
+      <span><strong>支払方法</strong></span>
+      <span class="ml-5"><%= @order.payment_method_i18n %></span>
+      </br>
+      <span><strong class="mt-3">お届け先</strong></span>
+      <span class="ml-5 mt-3"><%= @order.address_display %></span>
+      <span class="ml-4 mt-3"><%= @order.ship_name %></span>
     </div>
   </div>
 </div>

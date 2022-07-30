@@ -19,4 +19,8 @@ class Order < ApplicationRecord
   def total_amount_billed
     @total + shipping_fee
   end
+
+  def address_display
+    '〒' + ship_postalcode + '　' + ship_address
+  end
 end
