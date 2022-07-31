@@ -33,19 +33,49 @@ class Public::OrdersController < ApplicationController
 
   def create
     @customer = current_customer
+    @order = Order.new(order_params)
+    if @order.save
+      flash[:notice] = "ご注文が確定しました"
+      redirect_to thanks_public_orders_path
+    end
+
+
+    #select_address"2"の場合、配送先に追加
+    if params[:order][:select_address] == "2"
+      current_customer.address.create(address_params)
+    end
+
+    #カート商品の情報を商品詳細に移動
     @cart_items = current_customer.cart_items.all
-
-  end
-
-  def show
-    @customer = current_customer
+    @cart_items.each do |cart_item|
+    OrdersDetail.create(
+      item: cart_item.item,
+      order: @order,
+      amount: cart_item.amount,
+      tax_price: sum_of_price(cart_item)
+      )
+    end
+    #注文完了後、カート内商品を空にする
+    @cart_items.destroy_all
   end
 
   def thanks
     @customer = current_customer
   end
 
+  def show
+    @customer = current_customer
+    @order = Order.find(params[:id])
+    @orders_details = @order.orders_details
+  end
+
+  private
+
   def order_params
-    params.require(:order).permit(:payment_method, :ship_postalcode, :ship_address, :ship_name)
+    params.require(:order).permit(:payment_method, :ship_postalcode, :ship_address, :ship_name, :amount_billed)
+  end
+
+  def address_params
+    params.require(:order).permit(:postal_code, :saddress, :name)
   end
 end

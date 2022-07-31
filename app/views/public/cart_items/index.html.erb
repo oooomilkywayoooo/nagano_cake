@@ -34,7 +34,7 @@
             <td>
               <% @cart_item = CartItem.find(cart_item.id) %>
               <%= form_with model: @cart_item, url: public_cart_item_path(@cart_item), method: :patch do |f| %>
-                <%= f.select :amount, *[1..10], value:cart_item.amount %>
+                <%= f.select :amount, *[1..10], value:@cart_item.amount %>
                 <span class="ml-3"><%= f.submit "変更", class: "btn btn-success" %></span>
               <% end %>
             </td>

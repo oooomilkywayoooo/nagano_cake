@@ -21,9 +21,12 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       delete '/all_destroy' => 'cart_items#all_destroy'
     end
-    resources :orders, only: [:new, :index, :create, :show]
-    get '/thanks' => 'orders#thanks'
-    post '/orders/info' => 'orders#info'
+    resources :orders, only: [:new, :index, :create, :show] do
+      collection do
+        get '/thanks' => 'orders#thanks'
+        post '/info' => 'orders#info'
+      end
+    end
   end
 
   namespace :admin do
@@ -31,6 +34,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show]
+    resources :orders_details, only: [:update]
   end
 
   get '/admin' => 'admin/homes#top'
