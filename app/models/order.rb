@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   has_many :orders_details, dependent: :destroy
   belongs_to :customer
 
-  validates :customer_id, :ship_address, :ship_name, :payment_mrthod, :amount_billed, presence: true
+  validates :customer_id, :ship_address, :ship_name, :payment_method, :amount_billed, presence: true
   validates :ship_postalcode, length: {is: 7}, numericality: {only_integer: true }
 
   enum payment_method: {"credit_card": 0, "transfer": 1}

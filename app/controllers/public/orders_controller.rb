@@ -47,19 +47,24 @@ class Public::OrdersController < ApplicationController
 
     #カート商品の情報を商品詳細に移動
     @cart_items = current_customer.cart_items.all
-    @cart_items.each do |cart_item|
-    OrdersDetail.create(
-      item: cart_item.item,
-      order: @order,
-      amount: cart_item.amount,
-      tax_price: sum_of_price(cart_item)
-      )
-    end
+      @cart_items.each do |cart_item|
+        @orders_details = @order.orders_details.new
+        @orders_details.item_id = cart_item.item.id
+        @orders_details.order_id = cart_item.customer_id
+        @orders_details.tax_price = cart_item.item.add_tax_price
+        @orders_details.amount = cart_item.amount
+        @orders_details.save
+        redirect_to thanks_public_orders_path
+      end
     #注文完了後、カート内商品を空にする
     @cart_items.destroy_all
   end
 
   def thanks
+    @customer = current_customer
+  end
+
+  def index
     @customer = current_customer
   end
 

@@ -1,3 +1,4 @@
+<% payment_method = @order.payment_method %>
 <%= form_with model: @order, url: public_orders_path, method: :post do |f| %>
 <div class="container mx-auto">
   <p class="mt-5">
