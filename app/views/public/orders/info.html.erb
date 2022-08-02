@@ -38,6 +38,7 @@
       <table class="table table-bordered">
         <tbody>
           <tr><th class="bg-light" style="width: 50%;">送料</th>
+          <%= f.hidden_field :shipping_fee, value:@order.shipping_fee %>
           <td style="width: 50%;"><%= @order.shipping_fee %></td></tr>
           <tr><th class="bg-light" style="width: 50%;">商品合計</th>
           <td style="width: 50%;"><%= @total.round.to_s(:delimited) %></td></tr>
