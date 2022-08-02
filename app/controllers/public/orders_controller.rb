@@ -56,7 +56,6 @@ class Public::OrdersController < ApplicationController
         @orders_details.tax_price = cart_item.item.add_tax_price
         @orders_details.amount = cart_item.amount
         @orders_details.save
-          thanks_public_orders_path and return
       end
     #注文完了後、カート内商品を空にする
     @cart_items.destroy_all
