@@ -1,0 +1,51 @@
+<div class="container mx-auto">
+  <p class="mt-5">
+  <h4 class="mb-5"><strong class="bg-light px-3">注文履歴詳細</strong></h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-7">
+      <table class="table table-bordered">
+        <tr><th class="bg-light">注文日</th><td><%= @order.created_at.strftime('%Y/%m/%d') %></td></tr>
+        <tr><th class="bg-light d-flex align-items-center" style="height:100px;">配送先</th><td><%= @order.ship_postalcode %></br><%= @order.ship_address %></br><%= @order.ship_name %></td></tr>
+        <tr><th class="bg-light">支払方法</th><td><%= @order.payment_method_i18n %></td></tr>
+        <tr><th class="bg-light">ステータス</th><td><%= @order.order_status_i18n %></td></tr>
+      </table>
+    </div>
+    <div class="col-lg-3">
+      <table class="table table-bordered">
+        <tr><th class="bg-light">商品合計</th><td><%= @total.round.to_s(:delimited) %></td></tr>
+        <tr><th class="bg-light">配送料</th><td><%= @order.shipping_fee %></td></tr>
+        <tr><th class="bg-light">ご請求額</th><td><%= @order.amount_billed %></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      <table class="table table-bordered">
+        <thead class="bg-light">
+          <tr>
+            <th>商品</th>
+            <th>単価(税込)</th>
+            <th>個数</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <% @orders_details.each do |orders_details| %>
+        <tbody>
+          <tr>
+            <td><%= orders_details.item.name %></td>
+            <td><%= orders_details.tax_price %></td>
+            <td><%= orders_details.amount %></td>
+            <td><%= orders_details.sum_of_price %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
