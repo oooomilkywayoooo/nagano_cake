@@ -1,14 +1,13 @@
 class Public::CustomersController < ApplicationController
+  before_action :set_find_customer, only: [:show, :edit, :update, :out]
+
   def show
-    @customer = Customer.find(params[:id])
   end
 
   def edit
-    @customer = Customer.find(params[:id])
   end
 
   def update
-    @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
       flash[:notice] = "変更しました"
       redirect_to public_customer_path(@customer)
@@ -22,7 +21,6 @@ class Public::CustomersController < ApplicationController
   end
 
   def out
-    @customer = Customer.find(params[:id])
     @customer.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
@@ -30,6 +28,11 @@ class Public::CustomersController < ApplicationController
   end
 
   private
+
+  def set_find_customer
+    @customer = Customer.find(params[:id])
+  end
+
 
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email)

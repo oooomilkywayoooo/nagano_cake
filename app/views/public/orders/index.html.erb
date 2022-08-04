@@ -24,9 +24,9 @@
                 </br><%= order.ship_name %>
                 </td>
                 <td>
-                <% order.orders_details.each do |orders_detail| %>
+                    <% order.orders_details.each do |orders_detail| %>
                     <%= orders_detail.item.name %><br>
-                <% end %>
+                    <% end %>
                 </td>
                 <td><%= order.amount_billed %>円</td>
                 <td><%= order.order_status_i18n %></td>

@@ -1,7 +1,9 @@
-<div class="container mx-auto">
+<div class="container">
   <p class="mt-5">
     <h4 class="mb-5"><strong class="bg-light px-3">注文履歴詳細</strong></h4>
   </p>
+</div>
+<div class="container">
   <div class="row">
     <div class="col-lg-3">
       <p class="mt-2 mb-2"><strong>購入者</strong></p>
@@ -19,16 +21,18 @@
       <p><%= @order.created_at %></p>
       <p><%= @order.ship_address %></p>
       <p><%= @order.ship_name %></p>
-      <p><%= @order.payment_mrthod %></p>
+      <p><%= @order.payment_method %></p>
       <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
         <div class="form-inline">
-          <%= f.select :order_status,:name,Order.statuses.keys.to_a %>
+          <%= f.select :order_status,:name,Order.status.keys.to_a %>
           <%= f.submit '更新', class: "btn btn-success" %>
         </div>
-        <% end %>
+      <% end %>
     </div>
   </div>
+</div>
 
+<div class="container">
   <div class="row">
     <div class="col-lg-8">
       <table class="table">
@@ -56,12 +60,13 @@
             <% end %>
           </tr>
         </tbody>
+        <% end %>
       </table>
     </div>
     <div class="col-lg-4">
       <div class="total">
         <p><strong>商品合計</strong></p>
-        <span><%= @total.round.to_s(:delimited)%>円</span>
+        <span><%= @total.round.to_s(:delimited) %>円</span>
       </div>
       <div class="shipping_fee">
         <p><strong>送料</strong></p>

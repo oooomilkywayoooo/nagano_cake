@@ -2,6 +2,7 @@
 
 class Admins::SessionsController < Devise::SessionsController
   #before_action :configure_sign_in_params, only: [:create]
+  before_action :set_customer
 
   def after_sign_in_path_for(resource)
     admin_items_path
@@ -11,6 +12,11 @@ class Admins::SessionsController < Devise::SessionsController
     new_admin_session_path
   end
 
+  private
+
+  def set_customer
+    @customer = current_customer
+  end
 
   #GET /resource/sign_in
    #def new

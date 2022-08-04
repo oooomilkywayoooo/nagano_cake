@@ -1,4 +1,6 @@
 class Admin::ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :edit, :update]
+
   def index
     @items = Item.all.page(params[:page])
   end
@@ -19,17 +21,14 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     @genre = Genre.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
     @genres = Genre.all
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       flash[:notice] = "変更しました"
       redirect_to admin_item_path(@item)
@@ -39,6 +38,10 @@ class Admin::ItemsController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
      params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :is_active)

@@ -12,17 +12,17 @@
           <th>注文ステータス</th>
         </tr>
       </thead>
-      <% @orders.each do |order| %>
+      <% @orders_details.each do |orders_details| %>
       <tbody>
         <tr>
           <td>
-            <%= link_to admin_order_path(order) do %>
-              <%= order.create_at.strftime('%Y/%m/%d(%a) %H:%M:%S %z') %>
+            <%= link_to admin_order_path(orders_details) do %>
+              <%= orders_details.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
             <% end %>
           </td>
-          <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
-          <td><%= order.orders_detail.amount %></td>
-          <td><%= order.order_status %></td>
+          <td><%= orders_details.order.customer.last_name %><%= orders_details.order.customer.first_name %></td>
+          <td><%= orders_details.amount %></td>
+          <td><%= orders_details.order.order_status %></td>
         </tr>
       </tbody>
       <% end %>

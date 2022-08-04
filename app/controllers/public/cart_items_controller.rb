@@ -1,13 +1,13 @@
 class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
+  before_action :set_customer, only: [:index, :create]
+
   def index
-    @customer = current_customer
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
   def create
-    @customer = current_customer
     @genres = Genre.all
     @cart_item = current_customer.cart_items.new(cart_item_params)
     if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
@@ -40,6 +40,10 @@ class Public::CartItemsController < ApplicationController
   end
 
   private
+
+  def set_customer
+    @customer = current_customer
+  end
 
   def cart_item_params
     params.require(:cart_item).permit(:amount, :item_id)

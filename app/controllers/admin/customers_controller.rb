@@ -1,15 +1,15 @@
 class Admin::CustomersController < ApplicationController
+  before_action :set_find_customer, only: [:show, :edit]
+
   def index
     @customers = Customer.all
     @customers = Customer.page(params[:page])
   end
 
   def show
-    @customer = Customer.find(params[:id])
   end
 
   def edit
-    @customer = Customer.find(params[:id])
   end
 
   def update
@@ -23,6 +23,10 @@ class Admin::CustomersController < ApplicationController
   end
 
   private
+
+  def set_find_customer
+    @customer = Customer.find(params[:id])
+  end
 
   def customer_params
      params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)

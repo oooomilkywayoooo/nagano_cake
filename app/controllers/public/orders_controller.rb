@@ -1,6 +1,8 @@
 class Public::OrdersController < ApplicationController
+
+  before_action :set_customer
+
   def new
-    @customer = current_customer
     @order = Order.new
     @address = Address.new
     @name = current_customer.last_name + current_customer.first_name
@@ -8,7 +10,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def info
-    @customer = current_customer
     @order = Order.new(order_params)
     @cart_items = CartItem.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
@@ -32,7 +33,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @customer = current_customer
     @order = current_customer.orders.new(order_params)
     if @order.save
       flash[:notice] = "ご注文が確定しました"
@@ -43,8 +43,11 @@ class Public::OrdersController < ApplicationController
     #select_address"2"の場合、配送先に追加
     #追加されない　質問する
     if params[:order][:select_address] == "2"
-      @address = Address.new(address_params)
-      @address.save
+      address_new = current_customer.addresses.new(address_params)
+      address_new.postal_code = @order.ship_postalcode
+      address_new.address = @order.ship_address
+      address_new.name = @order.name
+      address_new.save
     end
 
     #カート商品の情報を商品詳細に移動
@@ -52,7 +55,7 @@ class Public::OrdersController < ApplicationController
       @cart_items.each do |cart_item|
         @orders_details = @order.orders_details.new
         @orders_details.item_id = cart_item.item.id
-        @orders_details.order_id = cart_item.customer_id
+        @orders_details.order_id = @order.id
         @orders_details.tax_price = cart_item.item.add_tax_price
         @orders_details.amount = cart_item.amount
         @orders_details.save
@@ -62,22 +65,23 @@ class Public::OrdersController < ApplicationController
   end
 
   def thanks
-    @customer = current_customer
   end
 
   def index
-    @customer = current_customer
     @orders = current_customer.orders
   end
 
   def show
-    @customer = current_customer
-    @orders_details = OrdersDetail.all
-    @total = @orders_details.inject(0) { |sum, item| sum + item.sum_of_price }
     @order = Order.find(params[:id])
+    @orders_details = @order.orders_details
+    @total = @orders_details.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
   private
+
+  def set_customer
+    @customer = current_customer
+  end
 
   def order_params
     params.require(:order).permit(:payment_method, :ship_postalcode, :ship_address, :ship_name, :amount_billed, :shipping_fee)

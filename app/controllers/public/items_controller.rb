@@ -1,18 +1,26 @@
 class Public::ItemsController < ApplicationController
+  before_action :set_customer
+  before_action :set_genres
+
   def index
-    @customer = current_customer
     @items = Item.all.page(params[:page]).per(8)
-    @genres = Genre.all
   end
 
   def show
-    @customer = current_customer
     @item = Item.find(params[:id])
-    @genres = Genre.all
     @cart_item = CartItem.new
   end
 
   private
+
+  def set_customer
+    @customer = current_customer
+  end
+
+  def set_genres
+    @genres = Genre.all
+  end
+
   def item_params
     params.require(:items).permit(:genre_id, :name, :introduction, :image_id, :price)
   end
