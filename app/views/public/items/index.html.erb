@@ -10,7 +10,7 @@
     </div>
     <div class="col-lg-9 d-flex flex-column mt-3">
       <h1>商品一覧</h1><h4>(全<%= @items.count %>件)</h4>
-      <div class="d-flex">
+      <div class="d-flex flex-wrap">
         <% @items.each do |item| %>
         <p class="mx-2 mt-3">
           <%= link_to public_item_path(item) do %>
