@@ -1,14 +1,17 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
   before_action :set_customer
   before_action :set_address, only: [:edit, :update, :destroy]
-  before_action :set_addresses, only: [:index, :create]
+  before_action :set_addresses, only: [:create]
 
   def index
     @address = Address.new
+    @addresses = Address.where(customer_id: current_customer.id)
   end
 
   def create
     @address = Address.new(address_params)
+    @address.customer_id = current_customer.id
     if @address.save
       flash[:notice] = "新しい配送先を登録しました"
       redirect_to public_addresses_path

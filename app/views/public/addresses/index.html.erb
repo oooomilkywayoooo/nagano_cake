@@ -58,20 +58,22 @@
             <th style="width: 30%;">　　　</th>
           </tr>
         </thead>
-        <% @addresses.each do |address| %>
-        <tbody>
-          <tr>
-            <th><%= address.postal_code %></th>
-            <th><%= address.address %></th>
-            <th><%= address.name %></th>
-            <th>
-              <div class="form-inline">
-                <span class="ml-4"><%= link_to "編集する", edit_public_address_path(address.id), class: "btn btn-success px4" %></span>
-                <span class="ml-3"><%= link_to "削除する", public_address_path(address.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger px4" %></span>
-              </div>
+        <% if customer_signed_in? && current_customer.id == @address.customer_id %>
+          <% @addresses.each do |address| %>
+          <tbody>
+            <tr>
+              <th><%= address.postal_code %></th>
+              <th><%= address.address %></th>
+              <th><%= address.name %></th>
+              <th>
+                <div class="form-inline">
+                  <span class="ml-4"><%= link_to "編集する", edit_public_address_path(address.id), class: "btn btn-success px4" %></span>
+                  <span class="ml-3"><%= link_to "削除する", public_address_path(address.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger px4" %></span>
+                </div>
               </th>
-          </tr>
-        </tbody>
+            </tr>
+          </tbody>
+          <% end %>
         <% end %>
       </table>
     </div>
