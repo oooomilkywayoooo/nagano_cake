@@ -13,19 +13,18 @@
       <p class="mt-2 mb-4"><strong>注文ステータス</strong></p>
     </div>
     <div class="col-lg-9">
-      <p>
+      <p class="mt-2 mb-2">
         <%= link_to public_customer_path do %>
           <%= @order.customer.last_name %> <%= @order.customer.first_name %>
         <% end %>
       </p>
-      <p><%= @order.created_at %></p>
-      <p><%= @order.ship_address %></p>
-      <p><%= @order.ship_name %></p>
-      <p><%= @order.payment_method %></p>
+      <p class="mt-2 mb-2"><%= @order.created_at.strftime('%Y/%m/%d') %></p>
+      <p class="mt-2 mb-4"><%= @order.ship_address %></p>
+      <p class="mt-2 mb-2"><%= @order.payment_method_i18n %></p>
       <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
         <div class="form-inline">
-          <%= f.select :order_status,:name,Order.status.keys.to_a %>
-          <%= f.submit '更新', class: "btn btn-success" %>
+          <%= f.select :order_status, Order.order_statuses_i18n.invert, {prompt: false} %>
+          <%= f.submit '更新', class: "btn btn-success ml-3" %>
         </div>
       <% end %>
     </div>
@@ -34,7 +33,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-7">
       <table class="table">
         <thead class="bg-light">
           <tr>
@@ -52,10 +51,10 @@
             <td><%= orders_detail.item.add_tax_price.to_s(:delimited)%></td>
             <td><%= orders_detail.amount %></td>
             <td><%= orders_detail.sum_of_price %></td>
-            <%= form_with model: @orders_detail, url: admin_orders_details_path(orders_detail), method: :patch do |f| %>
+            <%= form_with model: @orders_detail, url: admin_orders_detail_path(orders_detail), method: :patch do |f| %>
             <td>
-              <%= f.select :making_status,:name,OrdersDetail.statuses.key.to_a %>
-              <%= f.submit '更新', class: "btn btn-success"%>
+              <%= f.select :making_status, OrdersDetail.making_statuses_i18n.invert, {prompt: false} %>
+              <%= f.submit '更新', class: "btn btn-success ml-3"%>
             </td>
             <% end %>
           </tr>
@@ -63,19 +62,15 @@
         <% end %>
       </table>
     </div>
-    <div class="col-lg-4">
-      <div class="total">
-        <p><strong>商品合計</strong></p>
-        <span><%= @total.round.to_s(:delimited) %>円</span>
-      </div>
-      <div class="shipping_fee">
-        <p><strong>送料</strong></p>
-        <span><%= @order.shipping_fee %></span>
-      </div>
-      <div class="total_price">
-        <p><strong>請求金額合計</strong></p>
-        <span><%= @order.total_amount_billed %></span>
-      </div>
+    <div class="col-lg-2 align-text-bottom">
+      <p><strong>商品合計</strong></p>
+      <p><strong>送料</strong></p>
+      <p><strong>請求金額合計</strong></p>
+    </div>
+    <div class="col-lg-2 align-text-bottom">
+      <p class="ml-3"><%= @total.round.to_s(:delimited) %>円</p>
+      <p class="ml-3"><%= @order.shipping_fee %>円</p>
+      <p class="ml-3"><strong><%=@order.amount_billed %>円</strong></p>
     </div>
   </div>
 </div>

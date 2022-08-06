@@ -29,8 +29,10 @@
     <div class="col-lg-3 d-flex">
       <% @items.each do |item| %>
       <p class="mx-5 mt-3">
+        <%= link_to public_item_path(item) do %>
         <%= image_tag item.image, size: "200x120"%>
-        <span class="text-center d-block"><%= item.name %></span>
+          <span class="text-center d-block"><%= item.name %></span>
+        <% end %>
         <span class="text-center d-block">￥<%= item.price %></span>
       </p>
       <% end %>

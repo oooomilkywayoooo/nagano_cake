@@ -58,8 +58,8 @@
             <th style="width: 30%;">　　　</th>
           </tr>
         </thead>
-        <% if customer_signed_in? && current_customer.id == @address.customer_id %>
-          <% @addresses.each do |address| %>
+        <% @addresses.each do |address| %>
+          <% if address.customer_id == current_customer.id %>
           <tbody>
             <tr>
               <th><%= address.postal_code %></th>

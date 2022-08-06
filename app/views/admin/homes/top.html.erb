@@ -16,13 +16,13 @@
       <tbody>
         <tr>
           <td>
-            <%= link_to admin_order_path(orders_details) do %>
+            <%= link_to admin_order_path(orders_details.order_id) do %>
               <%= orders_details.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
             <% end %>
           </td>
           <td><%= orders_details.order.customer.last_name %><%= orders_details.order.customer.first_name %></td>
-          <td><%= orders_details.amount %></td>
-          <td><%= orders_details.order.order_status %></td>
+          <td><%= @items_count %></td>
+          <td><%= orders_details.order.order_status_i18n %></td>
         </tr>
       </tbody>
       <% end %>

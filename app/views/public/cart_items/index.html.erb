@@ -51,7 +51,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-3">
-      <%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary px-2" %>
+      <%= link_to "買い物を続ける", "/", class: "btn btn-primary px-2" %>
     </div>
     <div class="col-lg-6"></div>
     <div class="col-lg-3">
@@ -68,5 +68,7 @@
 </div>
 
 <div class="container text-center my-5">
-  <%= link_to "情報入力に進む", new_public_order_path, class: "btn btn-success px-2" %>
+  <% if @cart_items.any? %>
+    <%= link_to "情報入力に進む", new_public_order_path, class: "btn btn-success px-2" %>
+  <% end %>
 </div>

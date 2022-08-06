@@ -3,7 +3,7 @@ class OrdersDetail < ApplicationRecord
   belongs_to :order
 
 
-  enum making_status: {"製作不可": 0, "製作待ち": 1, "製作中": 2, "製作完了": 3}
+  enum making_status: {"impossible": 0, "wait": 1, "making": 2, "finish": 3}
 
   def sum_of_price
     item.add_tax_price * amount
