@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :set_find_customer, only: [:show, :edit, :update, :out]
+  before_action :set_find_customer, only: [:show, :edit, :update]
 
   def show
   end
@@ -21,6 +21,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def out
+    @customer = Customer.find(params[:customer_id])
     @customer.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行いたしました"

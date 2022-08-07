@@ -11,7 +11,7 @@ class Public::OrdersController < ApplicationController
 
   def info
     @order = Order.new(order_params)
-    @cart_items = CartItem.all
+    @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
     @amount_billed = @total.to_i + 800
     if params[:order][:select_address] == "0"
@@ -39,24 +39,13 @@ class Public::OrdersController < ApplicationController
       redirect_to thanks_public_orders_path
     end
 
-
-    #select_address"2"の場合、配送先に追加
-    #追加されない　質問する
-    if params[:order][:select_address] == "2"
-      address_new = current_customer.addresses.new(address_params)
-      address_new.postal_code = @order.ship_postalcode
-      address_new.address = @order.ship_address
-      address_new.name = @order.name
-      address_new.save
-    end
-
     #カート商品の情報を商品詳細に移動
     @cart_items = current_customer.cart_items.all
       @cart_items.each do |cart_item|
         @orders_details = @order.orders_details.new
         @orders_details.item_id = cart_item.item.id
-        @orders_details.order_id = @order.id
         @orders_details.tax_price = cart_item.item.add_tax_price
+        @orders_details.order_id = @order.id
         @orders_details.amount = cart_item.amount
         @orders_details.save
       end
@@ -84,7 +73,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:payment_method, :ship_postalcode, :ship_address, :ship_name, :amount_billed, :shipping_fee)
+    params.require(:order).permit(:id, :payment_method, :ship_postalcode, :ship_address, :ship_name, :amount_billed, :shipping_fee)
   end
 
   def address_params

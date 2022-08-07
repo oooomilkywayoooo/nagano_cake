@@ -5,7 +5,7 @@ class Admin::OrdersController < ApplicationController
     @total = @orders_details.inject(0) { |sum, item| sum + item.sum_of_price }
   end
 
-  def update
+	def update
 	  @order = Order.find(params[:id])
 	  if @order.update(order_params)
 	    flash[:success] = "注文ステータスを変更しました"
@@ -13,12 +13,11 @@ class Admin::OrdersController < ApplicationController
 	  else
 	    render "show"
 	  end
-  end
+	end
 
 	private
 
 	def order_params
 		  params.require(:order).permit(:order_status)
 	end
-
 end

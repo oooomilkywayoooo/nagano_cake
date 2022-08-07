@@ -8,20 +8,20 @@
     <div class="col-lg-3">
       <p class="mt-2 mb-2"><strong>購入者</strong></p>
       <p class="mt-2 mb-2"><strong>注文日</strong></p>
-      <p class="mt-2 mb-4"><strong>配送先</strong></p>
+      <p class="mt-2 mb-5"><strong>配送先</strong></p>
       <p class="mt-2 mb-2"><strong>支払方法</strong></p>
       <p class="mt-2 mb-4"><strong>注文ステータス</strong></p>
     </div>
     <div class="col-lg-9">
       <p class="mt-2 mb-2">
-        <%= link_to public_customer_path do %>
+        <%= link_to admin_customer_path(@order.customer) do %>
           <%= @order.customer.last_name %> <%= @order.customer.first_name %>
         <% end %>
       </p>
       <p class="mt-2 mb-2"><%= @order.created_at.strftime('%Y/%m/%d') %></p>
-      <p class="mt-2 mb-4"><%= @order.ship_address %></p>
+      <p class="mt-2">〒<%= @order.ship_postalcode %> <%= @order.ship_address %><br><%= @order.ship_name %></p>
       <p class="mt-2 mb-2"><%= @order.payment_method_i18n %></p>
-      <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+      <%= form_with model: [:admin, @order], method: :patch do |f| %>
         <div class="form-inline">
           <%= f.select :order_status, Order.order_statuses_i18n.invert, {prompt: false} %>
           <%= f.submit '更新', class: "btn btn-success ml-3" %>
@@ -51,7 +51,7 @@
             <td><%= orders_detail.item.add_tax_price.to_s(:delimited)%></td>
             <td><%= orders_detail.amount %></td>
             <td><%= orders_detail.sum_of_price %></td>
-            <%= form_with model: @orders_detail, url: admin_orders_detail_path(orders_detail), method: :patch do |f| %>
+            <%= form_with model: @orders_detail, url: admin_orders_detail_path(@order), method: :patch do |f| %>
             <td>
               <%= f.select :making_status, OrdersDetail.making_statuses_i18n.invert, {prompt: false} %>
               <%= f.submit '更新', class: "btn btn-success ml-3"%>

@@ -7,6 +7,6 @@
 
   <div class="text-center my-5">
     <%= link_to '退会しない', public_customer_path(@customer), class: 'btn btn-primary px-4'%>
-    <span class="ml-3"><%= link_to "退会する", public_customer_out_path, method: :patch, data: { confilm: "本当に退会しますか？" }, class: "btn btn-danger px-4" %></span>
+    <span class="ml-3"><%= link_to "退会する", public_customer_out_path, method: :patch, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger px-4" %></span>
   </div>
 </div>
