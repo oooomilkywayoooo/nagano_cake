@@ -48,13 +48,15 @@
       </div>
     </nav>
   </header>
+  
+  <body>
+    <main class="mt-5">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag :div, message, class: "notice pb-16" %>
+      <% end %>
+      <%= yield %>
+    </main>
+  </body>
 
-  <main class="mt-5">
-    <% flash.each do |message_type, message| %>
-      <%= content_tag :div, message, class: "notice pb-16" %>
-    <% end %>
-    <%= yield %>
-  </main>
-
-  <footer class="footer mt-auto py-3 bg-light" style="height: 100px;"></footer>
+  <footer class="bg-light"></footer>
 </html>
