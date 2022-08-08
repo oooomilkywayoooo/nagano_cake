@@ -17,19 +17,3 @@
   background-image: url("cake.jpg");
   background-size: cover;
 }
-
-body {
-  position: relative;
-}
-
-main {
-  min-height: 100vh;
-}
-
-footer{
-  width: 100%;
-  text-align: center;
-  padding: 30px 0;
-  position: absolute;
-  bottom: 0;
-}

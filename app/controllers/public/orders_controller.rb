@@ -33,25 +33,26 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = current_customer.orders.new(order_params)
-    if @order.save
-      flash[:notice] = "ご注文が確定しました"
-      redirect_to thanks_public_orders_path
-    end
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.save!
 
     #カート商品の情報を商品詳細に移動
     @cart_items = current_customer.cart_items.all
       @cart_items.each do |cart_item|
-        @orders_details = @order.orders_details.new
-        @orders_details.item_id = cart_item.item.id
-        @orders_details.tax_price = cart_item.item.add_tax_price
-        @orders_details.order_id = @order.id
-        @orders_details.amount = cart_item.amount
-        @orders_details.save
+        @orders_detail = OrdersDetail.new
+        @orders_detail.item_id = cart_item.item.id
+        @orders_detail.tax_price = cart_item.item.add_tax_price
+        @orders_detail.order_id = @order.id
+        @orders_detail.amount = cart_item.amount
+        @orders_detail.save
       end
     #注文完了後、カート内商品を空にする
     @cart_items.destroy_all
+
+    redirect_to thanks_public_orders_path
   end
+
 
   def thanks
   end

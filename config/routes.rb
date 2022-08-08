@@ -30,14 +30,15 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get '/' => 'homes#top'
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:show, :update]
     resources :orders_details, only: [:update]
+    resources :orders, only: [:show, :update]
   end
 
-  get '/admin' => 'admin/homes#top'
+
   get '/' => 'public/homes#top'
   get '/about' => 'public/homes#about'
 
